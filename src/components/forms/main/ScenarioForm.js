@@ -90,31 +90,46 @@ const ScenarioForm = () => {
   }, [])*/
 
   return (
-    <View style={styles.container}>
-      <View style={styles.stepIndicator}>
-        <StepIndicator
-          customStyles={stepIndicatorStyles}
-          stepCount={config.length}
-          direction="vertical"
-          currentPosition={currentPage}
-          labels={config.map((item) => {
-            return (
-              <View key={item.id} style={styles.rowItem}>
-                <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.date}>{item.date}</Text>
-              </View>
-            )
-          })}
+    <>
+      <View
+        style={{
+          flex: 0,
+          alignItems: 'center',
+          backgroundColor: '#ffffff',
+        }}
+      >
+        <Text style={{ fontSize: 16, fontWeight: 'bold', padding: 5 }}>
+          Követeljük a D21 keretrendszert!
+        </Text>
+      </View>
+      <View style={styles.container}>
+        <View style={styles.stepIndicator}>
+          <StepIndicator
+            customStyles={stepIndicatorStyles}
+            stepCount={config.length}
+            direction="vertical"
+            currentPosition={currentPage}
+            labels={config.map((item) => {
+              return (
+                <View key={item.id} style={styles.rowItem}>
+                  <Text adjustsFontSizeToFit style={styles.title}>
+                    {item.title}
+                  </Text>
+                  <Text style={styles.date}>{item.date}</Text>
+                </View>
+              )
+            })}
+          />
+        </View>
+        <FlatList
+          style={{ flexGrow: 1 }}
+          data={config}
+          renderItem={renderPage}
+          //onViewableItemsChanged={onViewableItemsChanged}
+          viewabilityConfig={viewabilityConfig}
         />
       </View>
-      <FlatList
-        style={{ flexGrow: 1 }}
-        data={config}
-        renderItem={renderPage}
-        //onViewableItemsChanged={onViewableItemsChanged}
-        viewabilityConfig={viewabilityConfig}
-      />
-    </View>
+    </>
   )
 }
 
@@ -125,7 +140,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   stepIndicator: {
-    marginVertical: 50,
+    marginBottom: 20,
     paddingHorizontal: 20,
   },
   rowItem: {
